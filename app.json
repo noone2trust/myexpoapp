@@ -20,6 +20,13 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "appEnv": "development",
+      "eas": {
+        "projectId": "e7abf221-5be2-411f-a36b-56afe6a220d9"
+      }
+    },
+    "owner": "salbacodes"
   }
 }
