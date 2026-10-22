@@ -22,6 +22,18 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     ...config,
     slug: config.slug ?? 'myexpoapp-expo-starter',
     name: `${config.name ?? 'myexpoapp-expo-starter'}${environmentSuffix}`,
+    plugins: [
+      ...(config.plugins ?? []),
+      [
+        'expo-splash-screen',
+        {
+          image: './assets/icon.png',
+          imageWidth: 120,
+          resizeMode: 'contain',
+          backgroundColor: '#f8fafc',
+        },
+      ],
+    ],
     extra: {
       ...config.extra,
       appEnv,

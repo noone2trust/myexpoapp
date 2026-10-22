@@ -1,33 +1,37 @@
 # myexpoapp
 my first expo app
 
-## Environments
+## First launch
 
-The EAS build profiles provide separate development, preview, and production
-builds. Development builds use a development client, preview builds are
-installable internally, and production builds are configured for store
-distribution.
+The app shows a branded splash screen followed by three swipeable onboarding
+screens. Onboarding completion is saved locally, so it is shown only once per
+installation. After onboarding, users can create an account or sign in.
 
-### Local development
+## Supabase authentication
 
-Copy `.env.example` to `.env.local` and set `EXPO_PUBLIC_API_URL` to your
-development API URL. Then run:
+The app uses Supabase email/password authentication. In your Supabase project,
+enable Email under Authentication providers. Copy `.env.example` to `.env` and
+set `EXPO_PUBLIC_SUPABASE_URL` and `EXPO_PUBLIC_SUPABASE_ANON_KEY` from the
+project's API settings. These values are bundled into the app and are not
+secrets; never put a database password or service-role key in an
+`EXPO_PUBLIC_` variable.
+
+Start local development with:
 
 ```sh
 npm start
 ```
 
-Expo defaults to the development app environment when `APP_ENV` is not set.
-The local `.env.local` file is ignored by Git.
+If email confirmation is enabled in Supabase, new users need to confirm their
+email before signing in.
 
-### EAS builds
+## EAS builds
 
-Initialize/link the project with `eas init`, then create the `development`,
-`preview`, and `production` EAS environments if they do not already exist.
-Set `EXPO_PUBLIC_API_URL` separately in each environment. Values prefixed with
-`EXPO_PUBLIC_` are included in the client app and must not contain secrets.
-
-Build any profile with the EAS CLI:
+The EAS build profiles provide separate development, preview, and production
+builds. Initialize/link the project with `eas init`, then create the
+`development`, `preview`, and `production` EAS environments if needed. Set
+`EXPO_PUBLIC_SUPABASE_URL` and `EXPO_PUBLIC_SUPABASE_ANON_KEY` in each
+environment.
 
 ```sh
 eas build --profile development
@@ -35,6 +39,6 @@ eas build --profile preview
 eas build --profile production
 ```
 
-Development builds require launching Metro with `npx expo start --dev-client`.
-Before the first store submission, configure the app's unique iOS bundle
-identifier and Android package name.
+Development builds require launching Metro with
+`npx expo start --dev-client`. Before the first store submission, configure the
+app's unique iOS bundle identifier and Android package name.
