@@ -20,14 +20,24 @@ export default ({ config }: ConfigContext): ExpoConfig => {
 
   return {
     ...config,
+    icon: './assets/images/logo.png',
     slug: config.slug ?? 'myexpoapp-expo-starter',
     name: `${config.name ?? 'myexpoapp-expo-starter'}${environmentSuffix}`,
+    android: {
+      ...config.android,
+      package: config.android?.package ?? 'com.brillprime',
+    },
+    ios: {
+      ...config.ios,
+      bundleIdentifier: config.ios?.bundleIdentifier ?? 'com.brillprime',
+    },
     plugins: [
       ...(config.plugins ?? []),
+      'expo-router',
       [
         'expo-splash-screen',
         {
-          image: './assets/icon.png',
+          image: './assets/images/logo.png',
           imageWidth: 120,
           resizeMode: 'contain',
           backgroundColor: '#f8fafc',
